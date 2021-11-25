@@ -3,8 +3,23 @@
 <html>
    <head>
       <title>Life Simulation</title>
+      <link type="text/css" rel="stylesheet" href="index.css" />
    </head>
-   <body>
-      <p>This is a test</p>
+   <body onload="setup()">
+      <div id="info-container">
+         <h2 id="creature-count"></h2>
+         <h2 id="average-creature-count"></h2>
+         <h2 id="expected-average"></h2>
+      </div>
+
+      <div id="control-panel">
+         <button id="create-creature-button">Create creature</button>
+      </div>
+
+      <div id="cell-container"></div>
+
+      <script src="./index.js"></script>
+      <script src="./creatures.js"></script>
+      <script src="./utils.js"></script>
    </body>
 </html>

@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+html, body {
+   --cell-border-size: 1px;
+   --cell-border-colour: #000;
+
+   padding: 0;
+   margin: 0;
+}
+
+#control-panel {
+   min-width: 10rem;
+   background-color: #ddd;
+   border-top: 2px solid #000;
+   border-right: 2px solid #000;
+   position: absolute;
+   bottom: 0;
+   left: 0;
+}
+#control-panel button {
+   font-family: "Lato";
+   margin: 1rem 0 1rem 0.5rem;
+}
+
+#creature-count {
+   text-align: center;
+   font-family: "Lato";
+   font-size: 2rem;
+}
+#average-creature-count {
+   text-align: center;
+   font-family: "Lato";
+   font-size: 1.6rem;
+}
+
+#cell-container {
+   border: 2px solid #000;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+.cell-row {
+   width: 100%;
+   height: var(--cell-size);
+}
+.cell {
+   width: var(--cell-size);
+   height: var(--cell-size);
+   background-color: rgb(130, 214, 119);
+   display: inline-block;
+   box-shadow: 0 0 0 calc(var(--cell-border-size) / 2) var(--cell-border-colour) inset;
+}
+
+.fruit {
+   background-color: rgb(255, 0, 76);
+   border-radius: 100%;
+   position: absolute;
+   transform: translate(-50%, -50%);
+}
+.creature {
+   background-color: green;
+   border-radius: 100%;
+   position: absolute;
+   transform: translate(-50%, -50%);
+   z-index: 2;
+}
+.creature .life {
+   height: 10px;
+   width: 50px;
+   background-color: #fff;
+   border: 2px solid #000;
+   position: absolute;
+   top: -2px;
+   left: 50%;
+   transform: translate(-50%, -100%);
+   z-index: 2;
+}
+.creature .life-bar {
+   height: 10px;
+   background-color: red;
+}
+.creature::after {
+   --size: 60px;
+   content: "";
+   width: var(--size);
+   height: var(--size);
+   background-color: rgba(0, 0, 0, 0.3);
+   border-radius: 100%;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);;
+   z-index: 1;
+}
