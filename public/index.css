@@ -2,10 +2,24 @@
 
 html, body {
    --cell-border-size: 1px;
-   --cell-border-colour: #000;
+   --cell-border-colour: rgb(33, 77, 40);
 
    padding: 0;
    margin: 0;
+}
+
+.hidden {
+   display: none !important;
+}
+
+#creature-tracker {
+   background-color: #eee;
+   border-bottom: 2px solid #000;
+   border-left: 2px solid #000;
+   position: absolute;
+   top: 0;
+   right: 0;
+   z-index: 2;
 }
 
 #control-panel {
@@ -16,6 +30,7 @@ html, body {
    position: absolute;
    bottom: 0;
    left: 0;
+   z-index: 2;
 }
 #control-panel button {
    font-family: "Lato";
@@ -39,6 +54,8 @@ html, body {
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
+   overflow: hidden;
+   z-index: 1;
 }
 .cell-row {
    width: 100%;
@@ -47,9 +64,14 @@ html, body {
 .cell {
    width: var(--cell-size);
    height: var(--cell-size);
-   background-color: rgb(130, 214, 119);
    display: inline-block;
    box-shadow: 0 0 0 calc(var(--cell-border-size) / 2) var(--cell-border-colour) inset;
+}
+.cell-1 {
+   background-color: rgb(130, 214, 119);
+}
+.cell-2 {
+   background-color: rgb(80, 199, 64);
 }
 
 .fruit {
@@ -64,32 +86,100 @@ html, body {
    position: absolute;
    transform: translate(-50%, -50%);
    z-index: 2;
+   box-shadow: 0 0 1px 3px #000;
+   cursor: pointer;
 }
-.creature .life {
+.creature.is-reproducing {
+   box-shadow: 0 0 1px 3px rgb(255, 0, 200);
+}
+
+.creature :is(.life, .reproductive-urge) {
    height: 10px;
    width: 50px;
    background-color: #fff;
    border: 2px solid #000;
    position: absolute;
-   top: -2px;
    left: 50%;
    transform: translate(-50%, -100%);
    z-index: 2;
+   pointer-events: none;
 }
-.creature .life-bar {
+.creature .life {
+   top: -2px;
+}
+.creature .reproductive-urge {
+   top: -15px;
+}
+.creature :is(.life-bar, .reproductive-urge-bar) {
    height: 10px;
-   background-color: red;
 }
+.creature .reproductive-urge-bar {
+   background-color: rgb(255, 0, 212);
+}
+
 .creature::after {
-   --size: 60px;
    content: "";
-   width: var(--size);
-   height: var(--size);
-   background-color: rgba(0, 0, 0, 0.3);
+   width: calc(var(--vision-size) * 2);
+   height: calc(var(--vision-size) * 2);
+   background-color: rgba(0, 0, 0, 0.15);
    border-radius: 100%;
    position: absolute;
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);;
+   z-index: 1;
+}
+
+#graph-container {
+   background-color: #ccc;
+   border-top: 2px solid #000;
+   border-left: 2px solid #000;
+   position: absolute;
+   right: 0;
+   bottom: 0;
+   z-index: 2;
+}
+
+.graph {
+   --point-size: 3px;
+
+   background-color: #fff;
+   border: 2px solid #000;
+   margin: 10px 20px 30px 30px;
+   position: relative;
+}
+.graph .title {
+   position: absolute;
+   left: 50%;
+   top: 0;
+   transform: translate(-50%, -100%);
+}
+.graph .axis-label {
+   font-size: 0.95rem;
+   position: absolute;
+}
+.graph .left-axis-label {
+   transform: translate(-100%, 50%);
+   left: -5px;
+}
+.graph .bottom-axis-label {
+   transform: translate(-50%, 100%);
+   bottom: -5px;
+}
+.graph .data-point {
+   width: var(--point-size);
+   height: var(--point-size);
+   background-color: #000;
+   border-radius: 100%;
+   position: absolute;
+   z-index: 2;
+}
+.graph .connecting-line {
+   height: 2px;
+   background-color: red;
+   margin-top: calc(var(--point-size) / 2);
+   margin-right: calc(var(--point-size) / 2);
+   transform-origin: top left;
+   position: absolute;
    z-index: 1;
 }

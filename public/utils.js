@@ -10,6 +10,10 @@ function roundNum(num, dpp) {
    return Math.round((num + Number.EPSILON) * power) / power;
 }
 
+function lerp(start, end, amount) {
+   return (1 - amount) * start + amount * end;
+}
+
 function randItem(arr) {
    return arr[Math.floor(Math.random() * arr.length)];
 }
